@@ -171,11 +171,12 @@
 		</dependency>
 
 		<!-- Spring taglib를 통한 JSP 유효성 검사 -->
-		<dependency>
+	<!--	<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>8.0.0.Final</version>
 		</dependency>
+		 -->
 
 
 		<dependency>
