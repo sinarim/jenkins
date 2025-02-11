@@ -1,35 +1,33 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 name: Java CI with Maven
 
-on:push:
-branches: [ "main" ]
-pull_request:
-branches: [ "main" ]
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
-jobs:build:
-runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-    steps:- uses: actions/checkout@v4
+    steps:
+      - uses: actions/checkout@v4
 
-    - name: Set up JDK 17uses: actions/setup-java@v4
-with:
-java-version: '17'
-distribution: 'temurin'
-cache: maven
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
 
-    - name: Build with Mavenrun: mvn clean install -DskipTests -f ./SpringProjectForJenkins/pom.xml
+      - name: Build with Maven
+        run: mvn clean install -DskipTests -f ./SpringProjectForJenkins/pom.xml
 
-    - name: Deploy to Tomcat Serverrun: |
-mvn tomcat:deploy -DskipTests -f ./SpringProjectForJenkins/pom.xml || \
-mvn tomcat:redeploy -DskipTests -f ./SpringProjectForJenkins/pom.xml
-env:
-TOMCAT_USERNAME: tomcat
-TOMCAT_PASSWORD: tomcat
-TOMCAT_URL: 'https://7b4d-14-36-141-71.ngrok-free.app/manager/text' 
+      - name: Deploy to Tomcat Server
+        run: |
+          mvn tomcat:deploy -DskipTests -f ./SpringProjectForJenkins/pom.xml || \
+          mvn tomcat:redeploy -DskipTests -f ./SpringProjectForJenkins/pom.xml
+        env:
+          TOMCAT_USERNAME: tomcat
+          TOMCAT_PASSWORD: tomcat
+          TOMCAT_URL: 'https://7b4d-14-36-141-71.ngrok-free.app/manager/text'
