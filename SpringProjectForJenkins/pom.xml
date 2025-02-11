@@ -240,7 +240,7 @@
 			</configuration>
 			</plugin>
 			
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>tomcat-maven-plugin</artifactId>
 				<version>1.1</version>
@@ -251,6 +251,7 @@
 					<password>tomcat</password>
 				</configuration>
 			</plugin>
+			 -->
 		</plugins>
   </build>
 </project>
